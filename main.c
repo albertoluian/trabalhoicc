@@ -1,10 +1,7 @@
-#include <stdio.h>
-#include <string.h>
+#include "list.c"
 
-int main(){
- int n;
- printf("Digite um numero\n");
- scanf("%d", &n);
- printf("Numero digitado: %d\n", n);
+int main()
+{
+    
     return 0;
-}  
+}
