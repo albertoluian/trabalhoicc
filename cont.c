@@ -1,7 +1,7 @@
 struct Contato {
-    char nome[100];
-    long long unsigned int numero;
-    char endereco[300];
-    char relacao[300];
-    char email[300];
+    char nome[101];
+    unsigned long long int numero;
+    char endereco[301];
+    char relacao[301];
+    char email[301];
 };
