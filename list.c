@@ -5,7 +5,27 @@
 int lenght = 0;
 
 struct Contato *List;
-
+struct Contato leContato(){
+   struct Contato aux;
+   printf("Digite o nome do contato\n");
+   fgets(aux.nome, 100, stdin);
+   printf("Digite o telefone\n");
+   scanf("%llu", &aux.numero);
+   printf("Digite o endereco\n");
+   fgets(aux.endereco, 300, stdin);
+   printf("tipo\n");
+   fgets(aux.relacao, 300, stdin);
+   printf("email\n");
+   fgets(aux.email, 300, stdin);
+   return aux;
+}
+void printContact(struct Contato item){
+    printf("%s %llu %s %s %s", item.nome, item.numero, item.endereco, item.relacao, item.email);
+}
+void listContact(){
+    for(int i=0; i<=lenght; i++)
+    printContact(List[i]);
+}
 void AddContact( struct Contato item )
 {
     List[lenght] = item;
@@ -52,7 +72,7 @@ void SearchByNumber( long long unsigned number )
     ?
     ( printContact(List[index]) )
     :
-    ( printf("O numero não foi anteriormente registrado") )
+    ( printf("O numero não foi anteriormente registrado") );
 
     
 }
