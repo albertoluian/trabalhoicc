@@ -6,9 +6,32 @@ int lenght = 0;
 
 struct Contato *List;
 
+
 void printContact(struct Contato cont)
 {   
     printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n  Nome: %s  Numero: %llu\n  Endereco: %s  Relacao: %s  Email: %s-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", cont.nome, cont.numero, cont.endereco, cont.relacao, cont.email);
+}
+
+
+struct Contato leContato(){
+   struct Contato aux;
+   printf("Digite o nome do contato\n");
+   fgets(aux.nome, 100, stdin);
+   printf("Digite o telefone\n");
+   scanf("%llu", &aux.numero);
+   printf("Digite o endereco\n");
+   fgets(aux.endereco, 300, stdin);
+   printf("tipo\n");
+   fgets(aux.relacao, 300, stdin);
+   printf("email\n");
+   fgets(aux.email, 300, stdin);
+   return aux;
+}
+
+}
+void listContact(){
+    for(int i=0; i<=lenght; i++)
+    printContact(List[i]);
 }
 
 void AddContact( struct Contato item )
