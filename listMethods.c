@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 #include "structs.c"
 
 int len = 0;
@@ -9,11 +8,16 @@ struct Contato *Lista; // Lista onde serão salvos os contatos
 
 int relacoes[6][2] = {{0,0}, {0,0}, {0,0}, {0,0}, {0,0}, {0,0}}; // Lista das 6 relações representam, cada um dos 6 arrays, a posição onde se encontra o primeiro e 
                                                                  // o ultimo + 1 elementos pertencentes a essa relacao
+char Toupper(char nome){
+        if(nome>='a' && nome<='z')
+            nome += 'A' - 'a';
+            return nome;
+    }
 
 
 void printContato(struct Contato cont) // Função usada para printar um unico contato 
 {   
-    printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n  Nome: %s  Numero: %llu\n  Endereco: %s  Relacao: %d\n  Email: %s-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", cont.nome, cont.numero, cont.endereco, cont.relacao, cont.email);
+    printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n  Nome: %s  Numero: %llu\n  Endereco: %s  Relacao: %d\n  Email: %s-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n", cont.nome, cont.numero, cont.endereco, cont.relacao, cont.email);
 }
 
 struct Contato criarContato() // Função que recebe os valores que constituem um contato e retorna o contato criado   
@@ -21,21 +25,21 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
     struct Contato aux;
     printf("Digite o nome do contato\n");
     fgets(aux.nome, 102, stdin);
-    aux.nome[strlen(aux.nome) - 1] = '\n'
+    aux.nome[strlen(aux.nome) - 1] = '\n';
 
     printf("Digite o endereco\n");
     fgets(aux.endereco, 302, stdin);
-    aux.endereco[strlen(aux.endereco) - 1] = '\n'
+    aux.endereco[strlen(aux.endereco) - 1] = '\n';
    
     printf("email\n");
     fgets(aux.email, 302, stdin);
-    aux.email[strlen(aux.email) - 1] = '\n'
+    aux.email[strlen(aux.email) - 1] = '\n';
 
-    printf("Numero da relacao\n-Relacao 1  -  1\n-Relacao 2  -  2\n-Relacao 3  -  3\n-Relacao 4  -  4\n-Relacao 5  -  5\n-Relacao 6  -  6");
+    printf("Numero da relacao\n-Relacao 1  -  1\n-Relacao 2  -  2\n-Relacao 3  -  3\n-Relacao 4  -  4\n-Relacao 5  -  5\n-Relacao 6  -  6\n");
     scanf("%d", &aux.relacao);
     while(1 > aux.relacao || aux.relacao > 6)
     {
-        printf("!POR FAVOR DIGITE CORRETAMENTE!\nNumero da relacao\n-Relacao 1  -  1\n-Relacao 2  -  2\n-Relacao 3  -  3\n-Relacao 4  -  4\n-Relacao 5  -  5\n-Relacao 6  -  6");
+        printf("!POR FAVOR DIGITE CORRETAMENTE!\nNumero da relacao\n-Relacao 1  -  1\n-Relacao 2  -  2\n-Relacao 3  -  3\n-Relacao 4  -  4\n-Relacao 5  -  5\n-Relacao 6  -  6\n");
         scanf("%d", &aux.relacao);
     }
    
@@ -52,7 +56,7 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
     {
         if(bool[0] == 0)
         {
-            aux.email[c] = toupper(aux.email[c]);
+            aux.email[c] = Toupper(aux.email[c]);
             if(aux.email[c+1] == '\n')
             {
                 soma++;
@@ -61,7 +65,7 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
         }
         if(bool[1] == 0)
         {
-            aux.nome[c] = toupper(aux.nome[c]);
+            aux.nome[c] = Toupper(aux.nome[c]);
             if(aux.nome[c+1] == '\n')
             {
                 soma++;
@@ -70,7 +74,7 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
         }
         if(bool[2] == 0)
         {
-            aux.endereco[c] = toupper(aux.endereco[c]);
+            aux.endereco[c] = Toupper(aux.endereco[c]);
             if(aux.endereco[c+1] == '\n')
             {
                 soma++;
@@ -196,7 +200,7 @@ void buscaPorNome(char nome[]) // Busca um elemento pelo nome
 
     while(nome[c] =! '\n') // Põe todos os caracteres da string inserida na função para maiusculo
     {
-        nome[c] = toupper(nome[c]);
+        nome[c] = Toupper(nome[c]);
 
         c++;
     }

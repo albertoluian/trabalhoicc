@@ -15,13 +15,13 @@ int main()
     // printContact(contato);
 
 
-    Lista = malloc(400*sizeof(struct Contato));
+    Lista = malloc(10*sizeof(struct Contato));
     int espaco = 10;
     int n = -1;
     printf("------------------------\nAgenda de contatos\n------------------------\n");
     while(n!=0){
-    //    if(lenght == espaco)
-    //    alocarMais(List, &espaco);
+  //  if(len == espaco)
+   // alocarMais(Lista, &espaco);
     printf("Digite:\n1-Adicionar Contato\n2- Remover contato\n3-Listar contatos\n4-Pesquisar contato por nome\n5-Pesquisar contato por telefone\n0-Sair\n");
     scanf("%d", &n); getchar();
     
@@ -91,7 +91,7 @@ int main()
 
     return 0;
 }
-/* void alocarMais(struct Contato *contatos, int *espaco){
+ void alocarMais(struct Contato *contatos, int *espaco){
     struct Contato *Aux;
     Aux = malloc((*espaco+10)*sizeof(struct Contato));
     for(int i=0; i<*espaco; i++){
@@ -103,4 +103,4 @@ int main()
     }
     free(Aux);
     *espaco+=10;
-} */
+} 
