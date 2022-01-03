@@ -20,8 +20,8 @@ int main()
     int n = -1;
     printf("------------------------\nAgenda de contatos\n------------------------\n");
     while(n!=0){
-  //  if(len == espaco)
-   // alocarMais(Lista, &espaco);
+    if(len == espaco)
+    alocarMais(Lista, &espaco);
     printf("Digite:\n1-Adicionar Contato\n2- Remover contato\n3-Listar contatos\n4-Pesquisar contato por nome\n5-Pesquisar contato por telefone\n0-Sair\n");
     scanf("%d", &n); getchar();
     
