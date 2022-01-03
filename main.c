@@ -1,5 +1,6 @@
 #include "listMethods.c"
 #include <stdlib.h>
+void alocarMais(struct Contato *contatos, int *espaco);
 int main()
 {
 
