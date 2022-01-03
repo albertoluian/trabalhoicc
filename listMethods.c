@@ -21,7 +21,7 @@ void printContato(struct Contato cont) // Função usada para printar um unico c
 }
 
 struct Contato criarContato() // Função que recebe os valores que constituem um contato e retorna o contato criado   
-    {
+{
     struct Contato aux;
     printf("Digite o nome do contato\n");
     fgets(aux.nome, 102, stdin);

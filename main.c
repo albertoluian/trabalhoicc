@@ -1,32 +1,36 @@
 #include "listMethods.c"
 #include <stdlib.h>
-void alocarMais(struct Contato *contatos, int *espaco);
+
+struct Contato* alocarMais(struct Contato *contatos)
+{
+    struct Contato *Aux;
+
+    Aux = (struct Contato*) malloc((len + 10) * sizeof(struct Contato));
+
+    int c;
+    for(c = 0; c < len; c++)
+        Aux[c] = contatos[c];
+
+    return Aux;
+} 
+
 int main()
 {
-
-    // struct Contato contato;
-
-    // fgets(contato.nome, 101, stdin);
-    // scanf("%llu", &contato.numero);
-    // fgets(contato.endereco , 301,stdin);
-    // fgets(contato.endereco , 301,stdin);
-    // fgets(contato.relacao , 301,stdin);
-    // fgets(contato.email , 301,stdin);
-    
-    // printContact(contato);
-
-
-    Lista = malloc(10*sizeof(struct Contato));
+    Lista = malloc(sizeof(struct Contato));
     int espaco = 10;
     int n = -1;
     printf("------------------------\nAgenda de contatos\n------------------------\n");
     while(n!=0){
-    if(len == espaco)
-    alocarMais(Lista, &espaco);
+    
     printf("Digite:\n1-Adicionar Contato\n2- Remover contato\n3-Listar contatos\n4-Pesquisar contato por nome\n5-Pesquisar contato por telefone\n0-Sair\n");
     scanf("%d", &n); getchar();
     
-    if(n==1) AddContato(criarContato());
+    if(n==1)
+    {
+        if(len * sizeof(struct Contato) == sizeof(Lista))
+            Lista = alocarMais(Lista);
+        AddContato(criarContato());
+    } 
     
     else if(n==2){
         printf("Digite o numero do contato a ser deletado\n");
@@ -34,9 +38,8 @@ int main()
         scanf("%llu", &temp);
         DelContato(temp);
     }
-    else if(n==3){
-        listarContatos();
-    }
+    else if(n==3) listarContatos();
+    
     else if(n==4){
         char tempName[100];
         printf("Digite o nome do contato\n");
@@ -53,55 +56,5 @@ int main()
    
    }
 
-    // struct Contato aux;
-    // int n = 0;
-
-    // while(n != 4)
-    // {
-    //     scanf("%d", &n);
-
-    //     if(n == 0)
-    //     {
-    //         strcpy(aux.nome, "aa");
-    //         aux.relacao = 1;
-    //         AddContato(aux);
-    //     }
-    //     if(n == 1)
-    //     {
-    //         strcpy(aux.nome, "bb");
-    //         aux.relacao = 1;
-    //         AddContato(aux);
-    //     }
-    //     if(n == 2)
-    //     {
-    //         strcpy(aux.nome, "aa");
-    //         aux.relacao = 2;
-    //         AddContato(aux);
-    //     }
-    //     if(n == 3)
-    //     {
-    //         strcpy(aux.nome, "bb");
-    //         aux.relacao = 2;
-    //         AddContato(aux);
-    //     }
-    //     if(n == 4)
-    //     {
-    //         listarContatos();
-    //     }
-    // }
-
     return 0;
 }
- void alocarMais(struct Contato *contatos, int *espaco){
-    struct Contato *Aux;
-    Aux = malloc((*espaco+10)*sizeof(struct Contato));
-    for(int i=0; i<*espaco; i++){
-        Aux[i] = contatos[i];
-    }
-    contatos = malloc((*espaco+10)*sizeof(struct Contato));
-    for(int i=0; i<*espaco; i++){
-        contatos[i] = Aux[i];
-    }
-    free(Aux);
-    *espaco+=10;
-} 
