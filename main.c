@@ -1,5 +1,4 @@
 #include "listMethods.c"
-#include <stdlib.h>
 
 struct Contato* alocarMais(struct Contato *contatos)
 {
@@ -16,43 +15,45 @@ struct Contato* alocarMais(struct Contato *contatos)
 
 int main()
 {
-    Lista = malloc(sizeof(struct Contato));
+    Lista = malloc(10 * sizeof(struct Contato));
     int espaco = 10;
     int n = -1;
     printf("------------------------\nAgenda de contatos\n------------------------\n");
-    while(n!=0){
-    
-    printf("Digite:\n1-Adicionar Contato\n2- Remover contato\n3-Listar contatos\n4-Pesquisar contato por nome\n5-Pesquisar contato por telefone\n0-Sair\n");
-    scanf("%d", &n); getchar();
-    
-    if(n==1)
+    while(n!=0)
     {
-        if(len * sizeof(struct Contato) == sizeof(Lista))
-            Lista = alocarMais(Lista);
-        AddContato(criarContato());
-    } 
-    
-    else if(n==2){
-        printf("Digite o numero do contato a ser deletado\n");
-        long long unsigned temp;
-        scanf("%llu", &temp);
-        DelContato(temp);
-    }
-    else if(n==3) listarContatos();
-    
-    else if(n==4){
-        char tempName[100];
-        printf("Digite o nome do contato\n");
-        fgets(tempName, 100, stdin);
-        buscaPorNome(tempName);
-    }
-    else if(n==5){
-        long long unsigned temp;
-        printf("Digite o numero do contato\n");
-        scanf("%llu", &temp);
-        buscaPorNumero(temp);
-    }
-    else continue;
+        
+        printf("Digite:\n1-Adicionar Contato\n2- Remover contato\n3-Listar contatos\n4-Pesquisar contato por nome\n5-Pesquisar contato por telefone\n0-Sair\n");
+        scanf("%d", &n); getchar();
+        
+        if(n==1)
+        {
+            if(len * sizeof(struct Contato) == sizeof(Lista))
+                Lista = alocarMais(Lista);
+            AddContato(criarContato());
+        } 
+        
+        else if(n==2){
+            printf("Digite o numero do contato a ser deletado\n");
+            long long unsigned temp;
+            scanf("%llu", &temp);
+            DelContato(temp);
+        }
+        else if(n==3) listarContatos();
+        
+        else if(n==4){
+            printf("Digite o nome do contato\n");
+            char tempName[102];
+            fgets(tempName, 102, stdin);
+            tempName[strlen(tempName) - 1] = '\n';
+            buscaPorNome(tempName);
+        }
+        else if(n==5){
+            long long unsigned temp;
+            printf("Digite o numero do contato\n");
+            scanf("%llu", &temp);
+            buscaPorNumero(temp);
+        }
+        else continue;
    
    }
 
