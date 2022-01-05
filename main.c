@@ -1,22 +1,12 @@
 #include "listMethods.c"
 
-struct Contato* alocarMais(struct Contato *contatos)
-{
-    struct Contato *Aux;
-
-    Aux = (struct Contato*) malloc((len + 10) * sizeof(struct Contato));
-
-    int c;
-    for(c = 0; c < len; c++)
-        Aux[c] = contatos[c];
-
-    return Aux;
-} 
+ 
 
 int main()
 {
-    Lista = malloc(10 * sizeof(struct Contato));
     int espaco = 10;
+    Lista = malloc(espaco * sizeof(struct Contato));
+    
     int n = -1;
     printf("------------------------\nAgenda de contatos\n------------------------\n");
     while(n!=0)
@@ -27,8 +17,10 @@ int main()
         
         if(n==1)
         {
-            if(len * sizeof(struct Contato) == sizeof(Lista))
-                Lista = alocarMais(Lista);
+            if(len == espaco){
+                Lista = realloc(Lista, (espaco+10)*sizeof(struct Contato));
+                espaco +=10;
+            }
             AddContato(criarContato());
         } 
         
