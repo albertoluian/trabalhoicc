@@ -64,12 +64,12 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
     if(aux.relacao == lenRelacoes + 1)
     {
         printf("Insira o nome da relacao:\n");
-        fgets(aux.nomeRel, 102, stdin);
+        getchar();
         fgets(aux.nomeRel, 102, stdin);
         aux.nomeRel[strlen(aux.nomeRel) - 1] = '\n';
     }
     else
-        strcpy(aux.nomeRel, Lista[relacoes[c][0]].nomeRel);
+        strcpy(aux.nomeRel, Lista[relacoes[aux.relacao-1][0]].nomeRel);
     
    
     printf("Digite o telefone\n");
@@ -134,7 +134,7 @@ void AddContato( struct Contato cont ) // Recebe um contato e o adiciona de acor
     {
         if(lenRelacoes == 0)
         {
-            relacoes[0][1] = 0;
+            relacoes[0][0] = 0;
             relacoes[0][1] = 0;
         }
         else
@@ -208,13 +208,16 @@ void DelContato( unsigned long long numero ) // Deleta o contato com numero igua
     
     else
     {
-        int c, flag = 0, relIndex;
+        int c, flag = 0, relIndex, excluirRel = 0;
         for(c = 0; c < len; c++)
         {
-            if(Lista[c].numero == numero) // Verifica se o valor desse numero existe ou não
+            if(Lista[c].numero == numero){ // Verifica se o valor desse numero existe ou não
                 flag = 1;
+              if (c == relacoes[Lista[c].relacao-1][0] && relacoes[Lista[c].relacao-1][1] == relacoes[Lista[c].relacao-1][0]+1)
+                excluirRel = 1;
+            
                 relIndex =  Lista[c].relacao - 1;
-             
+            }
             if(flag == 1 && c != len - 1) // Caso exista salva o valor a frente em cima desse e assim por sequencia
                 Lista[c] = Lista[c+1];
         }
@@ -228,12 +231,26 @@ void DelContato( unsigned long long numero ) // Deleta o contato com numero igua
             for(c = relIndex; c < lenRelacoes; c++) // Padroniza os valores das relação seguintes ja que existe um elemento a menos dentro da "Lista"
             {
                 if(c != relIndex)
-                    relacoes[c][1]--;
-                relacoes[c][0]--;
-            }
+                    relacoes[c][0]--;
+                relacoes[c][1]--;
+            
+            
 
+            }
+           if(excluirRel == 1){
+               for(c = relIndex; c<lenRelacoes-1; c++){
+                   relacoes[c][0] = relacoes[c+1][0];
+                   relacoes[c][1] = relacoes[c+1][1];
+               }     
+               for(c = relIndex; c<len-1; c++){
+                   Lista[c].relacao -=1;
+               }
+               
+               lenRelacoes--;
+           }
 
             len--;
+            
         }
     }
 
