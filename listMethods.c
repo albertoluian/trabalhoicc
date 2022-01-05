@@ -74,6 +74,19 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
    
     printf("Digite o telefone\n");
     scanf("%llu", &aux.numero);
+    int existenciaNumero = 0;
+    while(existenciaNumero != 2){
+        if(existenciaNumero != 0){
+            printf("Digite um numero nao cadastrado anteriormente\n");
+            scanf("%llu", &aux.numero);
+        }
+        existenciaNumero = 2;
+        for(c = 0; c<len; c++)
+        if(Lista[c].numero == aux.numero){
+          existenciaNumero = 1;
+          break;
+        }
+    }
 
     // A seguir são postos os valores das 3 strings presentes em um contato de forma maiuscula 
 

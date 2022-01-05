@@ -56,6 +56,6 @@ int main()
         else continue;
    
    }
-
+    free(Lista);
     return 0;
 }
