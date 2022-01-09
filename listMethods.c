@@ -1,13 +1,14 @@
 #include "structs.c"
 
-int len = 0, lenRelacoes = 0;
+int len = 0, // Tamanho da lista de contatos
+    lenRelacoes = 0; // Tamanho da lista de relações
 
 struct Contato *Lista; // Lista onde serão salvos os contatos
 
 int relacoes[15][2]; // representam, cada um dos arrays inseridos, a posição onde se encontra o primeiro e 
                                                                  // o ultimo + 1 elementos pertencentes a essa relacao
 
-char Toupper(char nome)
+char Toupper(char nome) // Função que recebe uma caractere e o retorna maiusculo caso seja possivel
 {
         if(nome>='a' && nome<='z')
             nome += 'A' - 'a';
@@ -46,10 +47,11 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
     
     scanf("%d", &aux.relacao);
     
-    if(aux.relacao == 15 && lenRelacoes == 15)
-        aux.relacao = 17;
+    if(aux.relacao == 16 && lenRelacoes == 15) // Em qualquer outra situação o if a frente seria valido porem o valor 16 em "aux.relacao" não
+        aux.relacao = 17;                      // seria valido ja que com aux.relacao == lenRelacoes + 1 se cria uma nova relação e o valor maximo é 15 
     
-    while(1 > aux.relacao || aux.relacao > lenRelacoes + 1)
+    while(1 > aux.relacao || aux.relacao > lenRelacoes + 1) // Caso seja digitado valor um fora do permitido para uma
+                                                            // relação se pede um valor valido até ele ser inserido
     {
         printf("!POR FAVOR DIGITE CORRETAMENTE!\n");
         for(c = 0; c < lenRelacoes; c++)
@@ -61,34 +63,37 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
         scanf("%d", &aux.relacao);
     }
 
-    if(aux.relacao == lenRelacoes + 1)
+    if(aux.relacao == lenRelacoes + 1) // Nessa situação é criada uma relação
     {
         printf("Insira o nome da relacao:\n");
-        getchar();
+        getchar(); // Para pegar o '\n' do scanf anterior 
         fgets(aux.nomeRel, 102, stdin);
         aux.nomeRel[strlen(aux.nomeRel) - 1] = '\n';
     }
-    else
+    else // Emn qualquer outra inserido um valor pre existente como relação
         strcpy(aux.nomeRel, Lista[relacoes[aux.relacao-1][0]].nomeRel);
     
    
     printf("Digite o telefone\n");
     scanf("%llu", &aux.numero);
     int existenciaNumero = 0;
-    while(existenciaNumero != 2){
-        if(existenciaNumero != 0){
+    while(existenciaNumero != 2) // Verifica se ja existe um numero igual anteriormente inserido
+    { 
+        if(existenciaNumero != 0)
+        {
             printf("Digite um numero nao cadastrado anteriormente\n");
             scanf("%llu", &aux.numero);
         }
         existenciaNumero = 2;
         for(c = 0; c<len; c++)
-        if(Lista[c].numero == aux.numero){
-          existenciaNumero = 1;
-          break;
-        }
+            if(Lista[c].numero == aux.numero)
+            {
+                existenciaNumero = 1;
+                break;
+            }
     }
 
-    // A seguir são postos os valores das 3 strings presentes em um contato de forma maiuscula 
+    // A seguir são postos os valores das strings presentes em um contato, menos email, de forma maiuscula 
 
     int soma = 0;
 
@@ -97,7 +102,7 @@ struct Contato criarContato() // Função que recebe os valores que constituem u
 
     while(soma < 3)
     {
-        if(bool[0] == 0)
+        if(bool[0] == 0) // Caso no array bool o valor respectivo a essa condição ainda seja 0 existem valores da string a se verificados
         {
             aux.endereco[c] = Toupper(aux.endereco[c]);
             if(aux.endereco[c+1] == '\n')
@@ -143,14 +148,15 @@ void AddContato( struct Contato cont ) // Recebe um contato e o adiciona de acor
     int relIndex = cont.relacao - 1; // Representa o index no array "relacoes" que será usadp
 
     int c; // Variavel usada para fazer todos os loops
-    if(relIndex == lenRelacoes)
+
+    if(relIndex == lenRelacoes) // No caso de relIndex == lenRelacoes é gereda uma nova relação
     {
-        if(lenRelacoes == 0)
+        if(lenRelacoes == 0) // Caso não exista nenhuma relação anteriromente é criada uma com os valores zerados
         {
             relacoes[0][0] = 0;
             relacoes[0][1] = 0;
         }
-        else
+        else // Caso já existam relações anteriormente os valores da nova relação são baseados nos da ultima relação
         {
             relacoes[relIndex][0] = relacoes[relIndex -1][1];
             relacoes[relIndex][1] = relacoes[relIndex -1][1];
@@ -247,8 +253,6 @@ void DelContato( unsigned long long numero ) // Deleta o contato com numero igua
                     relacoes[c][0]--;
                 relacoes[c][1]--;
             
-            
-
             }
            if(excluirRel == 1){
                for(c = relIndex; c<lenRelacoes-1; c++){
@@ -269,7 +273,7 @@ void DelContato( unsigned long long numero ) // Deleta o contato com numero igua
 
 }
 
-void buscaPorNome(char nome[]) // Busca um elemento pelo nome
+void buscaPorNome(char nome[]) // Busca um elemento pelo nome 
 {
     int c = 0, flag = 0, size = strlen(nome);
 

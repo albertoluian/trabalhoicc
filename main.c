@@ -1,7 +1,5 @@
 #include "listMethods.c"
 
- 
-
 int main()
 {
     int espaco = 10;
